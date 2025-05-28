@@ -12,7 +12,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Object cadastrar(Usuario usuario){
+    public Usuario cadastrar(Usuario usuario){
         if(usuarioRepository.existsByEmail((usuario.getEmail()))){
             throw new RuntimeException("Email ja cadastrado");
         }
