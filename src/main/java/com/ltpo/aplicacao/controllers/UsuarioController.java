@@ -14,15 +14,42 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity cadastrar(@RequestBody Usuario usuario){
-        Usuario novoUsuario = (Usuario) usuarioService.cadastrar(usuario);
+    public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuario){
+        Usuario novoUsuario = usuarioService.cadastrar(usuario);
         return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity listar(){
+    public ResponseEntity listarUsuarios(){
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id){
+        return usuarioService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity <Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario dados){
+        return usuarioService.findById(id).map(usuario -> {
+            usuario.setNome(dados.getNome());
+            usuario.setEmail(dados.getEmail());
+            usuario.setSenha(dados.getSenha());
+            return  ResponseEntity.ok(usuarioService.save(usuario));
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id){
+        if(usuarioService.existsById(id)){
+            usuarioService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     // Outros endpoints (Get por ID, PUT, DELETE)
 }
