@@ -22,7 +22,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public List listarTodos(){
+    public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
     }
 
@@ -35,12 +35,10 @@ public class UsuarioService {
     }
 
     public boolean existsById(Long id) {
-        return 
+        return usuarioRepository.existsById(id);
     }
 
     public void deleteById(Long id) {
-
+        usuarioRepository.deleteById(id);
     }
-
-    //Outro métodos como buscar, atualizar, excluir
 }
