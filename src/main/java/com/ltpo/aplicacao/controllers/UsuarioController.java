@@ -49,7 +49,4 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
-
-
-    // Outros endpoints (Get por ID, PUT, DELETE)
 }
