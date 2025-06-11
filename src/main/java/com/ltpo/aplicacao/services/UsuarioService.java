@@ -17,8 +17,6 @@ public class UsuarioService {
         if(usuarioRepository.existsByEmail((usuario.getEmail()))){
             throw new RuntimeException("Email ja cadastrado");
         }
-
-        // Criptografar senha na aplicação real
         return usuarioRepository.save(usuario);
     }
 
