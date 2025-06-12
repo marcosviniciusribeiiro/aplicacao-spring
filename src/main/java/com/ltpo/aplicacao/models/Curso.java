@@ -2,6 +2,9 @@ package com.ltpo.aplicacao.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "cursos")
 public class Curso {
@@ -11,6 +14,12 @@ public class Curso {
 
     @Column(nullable = false, length = 100)
     private String nome;
+
+    @ManyToMany
+    @JoinTable(name = "usuario_curso",
+            joinColumns = @JoinColumn(name = "usuarios_id"),
+            inverseJoinColumns = @JoinColumn(name = "cursos_id"))
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public Long getId() {
         return id;
