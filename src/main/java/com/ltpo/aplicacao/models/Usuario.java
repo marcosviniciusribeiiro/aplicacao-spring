@@ -2,6 +2,9 @@ package com.ltpo.aplicacao.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -17,6 +20,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private String senha;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Curso> cursos = new ArrayList<>();
 
     public Long getId() {
         return id;
