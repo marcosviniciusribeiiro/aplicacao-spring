@@ -21,7 +21,7 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @ManyToMany(mappedBy = "cursos")
+    @OneToMany(mappedBy = "usuario")
     private List<Curso> cursos = new ArrayList<>();
 
     public Long getId() {
@@ -54,5 +54,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 }
