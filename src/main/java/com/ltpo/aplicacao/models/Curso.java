@@ -15,11 +15,9 @@ public class Curso {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @ManyToMany
-    @JoinTable(name = "usuario_curso",
-            joinColumns = @JoinColumn(name = "usuarios_id"),
-            inverseJoinColumns = @JoinColumn(name = "cursos_id"))
-    private List<Usuario> usuarios = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -35,5 +33,13 @@ public class Curso {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
