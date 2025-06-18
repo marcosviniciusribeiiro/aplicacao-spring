@@ -39,6 +39,7 @@ public class UsuarioController {
             usuario.setNome(dados.getNome());
             usuario.setEmail(dados.getEmail());
             usuario.setSenha(dados.getSenha());
+            usuario.setCursos(dados.getCursos());
             return  ResponseEntity.ok(usuarioService.save(usuario));
         }).orElse(ResponseEntity.notFound().build());
     }
