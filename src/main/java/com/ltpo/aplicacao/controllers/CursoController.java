@@ -37,6 +37,7 @@ public class CursoController {
     public ResponseEntity<Curso> atualizarCurso(@PathVariable Long id, @RequestBody Curso dados){
         return cursoService.findById(id).map(curso -> {
             curso.setNome(dados.getNome());
+            curso.setUsuario(dados.getUsuario());
             return  ResponseEntity.ok(cursoService.save(curso));
         }).orElse(ResponseEntity.notFound().build());
     }
