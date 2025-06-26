@@ -1,5 +1,6 @@
 package com.ltpo.aplicacao.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -21,7 +22,13 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "usuario")
+    @ManyToMany
+    @JoinTable(
+            name = "usuarios_cursos",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
+    )
+    @JsonManagedReference
     private List<Curso> cursos = new ArrayList<>();
 
     public Long getId() {
