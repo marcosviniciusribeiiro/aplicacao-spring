@@ -1,6 +1,7 @@
 package com.ltpo.aplicacao.models;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,9 @@ public class Curso {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @ManyToMany(mappedBy = "cursos")
+    @JsonBackReference
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -35,11 +36,11 @@ public class Curso {
         this.nome = nome;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }
