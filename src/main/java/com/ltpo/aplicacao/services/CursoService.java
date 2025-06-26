@@ -26,6 +26,8 @@ public class CursoService {
     public Optional<Curso> findById(Long id){
         return cursoRepository.findById(id);
     }
+    public Curso findByNome(String nome){ return cursoRepository.findByNome(nome); }
+
     public Curso save(Curso curso){
         return  cursoRepository.save(curso);
     }
